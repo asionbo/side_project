@@ -19,6 +19,7 @@ class MyApplication: Application() {
         val tacAnalyticsOptions: TACAnalyticsOptions = tacApplicationOptions.sub("analytics")
 
         tacAnalyticsOptions.strategy(TACAnalyticsStrategy.INSTANT)
+        tacAnalyticsOptions.setWifiInstantSendEnabled(true)
 
         TACAnalyticsService.getInstance().start(this)
     }

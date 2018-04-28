@@ -37,8 +37,8 @@ class WebDataSource private constructor(){
     private fun initRetrofit():Retrofit{
         val builder = OkHttpClient.Builder()
                 .addInterceptor(getLogInterceptor())
-                .readTimeout(10,TimeUnit.SECONDS)
-                .connectTimeout(30,TimeUnit.SECONDS)
+                .readTimeout(100,TimeUnit.SECONDS)
+                .connectTimeout(300,TimeUnit.SECONDS)
 
         val retrofit = Retrofit.Builder().baseUrl(BASE_URL+"/")
                 .addConverterFactory(GsonConverterFactory.create(Gson()))

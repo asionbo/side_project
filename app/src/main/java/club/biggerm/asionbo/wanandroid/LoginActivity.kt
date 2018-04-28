@@ -26,13 +26,10 @@ import android.Manifest.permission.READ_CONTACTS
 import android.util.Log
 import club.biggerm.asionbo.wanandroid.network.OpenApiService
 import club.biggerm.asionbo.wanandroid.network.WebDataSource
-import io.reactivex.Scheduler
 import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.internal.disposables.ListCompositeDisposable
-import io.reactivex.internal.schedulers.IoScheduler
 import io.reactivex.schedulers.Schedulers
 
-import kotlinx.android.synthetic.main.activity_login.*
+import kotlinx.android.synthetic.main.login_activity.*
 
 /**
  * A login screen that offers login via email/password.
@@ -45,7 +42,7 @@ class LoginActivity : AppCompatActivity(), LoaderCallbacks<Cursor> {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_login)
+        setContentView(R.layout.login_activity)
         // Set up the login form.
         populateAutoComplete()
         password.setOnEditorActionListener(TextView.OnEditorActionListener { _, id, _ ->
