@@ -3,6 +3,7 @@ package club.biggerm.asionbo.wanandroid
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
+import android.util.Log
 import club.biggerm.asionbo.wanandroid.adapter.ArticleListAdapter
 import club.biggerm.asionbo.wanandroid.model.Article
 import club.biggerm.asionbo.wanandroid.network.OpenApiService
@@ -18,14 +19,12 @@ import kotlinx.android.synthetic.main.main_activity.*
 
 class MainActivity : AppCompatActivity() {
 
-    var datas:List<Article>? = null
+    var datas:List<Article> = listOf()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.main_activity)
         getArticleList()
-
-        var layoutManager : LinearLayoutManager
     }
 
     private fun getArticleList() {
@@ -36,7 +35,8 @@ class MainActivity : AppCompatActivity() {
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({result ->
                     if(0 == result.errorCode){
-                        datas = result.data
+                        datas = result.data.datas
+                        Log.e("datas",datas.toString())
                         refreshContentView()
                     }else{
                         AppUtils.showResultDialog(this,result.errorMsg)
@@ -47,10 +47,10 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun refreshContentView() {
-        ArticleListAdapter(this)
-
+        val mAdapter = ArticleListAdapter(this)
         rl_content.layoutManager = LinearLayoutManager(this)
-        rl_content.adapter
+        rl_content.adapter = mAdapter
+        mAdapter.addData(datas)
     }
 
 }

@@ -1,11 +1,13 @@
 package club.biggerm.asionbo.wanandroid.network
 
-import club.biggerm.asionbo.wanandroid.model.Article
+import club.biggerm.asionbo.wanandroid.model.ArticleTotal
 import club.biggerm.asionbo.wanandroid.model.BaseResult
 import club.biggerm.asionbo.wanandroid.model.User
 import io.reactivex.Observable
-import retrofit2.http.*
-import java.util.*
+import retrofit2.http.GET
+import retrofit2.http.POST
+import retrofit2.http.Path
+import retrofit2.http.Query
 
 /**
  * Created by asionbo on 2018/4/11.
@@ -19,5 +21,5 @@ interface OpenApiService{
 
 
     @GET("article/list/{page}/json")
-    fun getArticleList(@Path("page") page:Int):Observable<BaseResult<List<Article>>>
+    fun getArticleList(@Path("page") page:Int):Observable<BaseResult<ArticleTotal>>
 }

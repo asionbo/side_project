@@ -39,4 +39,5 @@ dependencies {
     compile 'io.reactivex.rxjava2:rxjava:2.1.7'
     compile 'com.tencent.tac:tac-core:1.0.0'
     implementation 'com.afollestad.material-dialogs:commons:0.9.6.0'
+    implementation 'com.squareup.picasso:picasso:2.71828'
 }

@@ -37,6 +37,8 @@ class WebDataSource private constructor(){
     private fun initRetrofit():Retrofit{
         val builder = OkHttpClient.Builder()
                 .addInterceptor(getLogInterceptor())
+                .addInterceptor(ReceivedCookiesInterceptor())
+                .addInterceptor(AddCookiesInterceptor())
                 .readTimeout(100,TimeUnit.SECONDS)
                 .connectTimeout(300,TimeUnit.SECONDS)
 
