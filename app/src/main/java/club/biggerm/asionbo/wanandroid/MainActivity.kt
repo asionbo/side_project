@@ -4,7 +4,8 @@ import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import android.util.Log
-import club.biggerm.asionbo.wanandroid.adapter.ArticleListAdapter
+import android.widget.Toast
+import club.biggerm.asionbo.wanandroid.adapter.ArticleTitleAdapter
 import club.biggerm.asionbo.wanandroid.model.Article
 import club.biggerm.asionbo.wanandroid.network.OpenApiService
 import club.biggerm.asionbo.wanandroid.network.WebDataSource
@@ -20,6 +21,7 @@ import kotlinx.android.synthetic.main.main_activity.*
 class MainActivity : AppCompatActivity() {
 
     var datas:List<Article> = listOf()
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -47,10 +49,15 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun refreshContentView() {
-        val mAdapter = ArticleListAdapter(this)
+//        val mAdapter = ArticleListAdapter(this)
+        val adapter= ArticleTitleAdapter(R.layout.article_list_item,datas)
         rl_content.layoutManager = LinearLayoutManager(this)
-        rl_content.adapter = mAdapter
-        mAdapter.addData(datas)
-    }
+        rl_content.adapter = adapter
+        rl_content.isNestedScrollingEnabled = true
+//        mAdapter.addData(datas)
 
+        adapter.setOnItemClickListener { adapter1, view, position ->
+            Toast.makeText(this,"click"+position,Toast.LENGTH_SHORT).show()
+        }
+    }
 }

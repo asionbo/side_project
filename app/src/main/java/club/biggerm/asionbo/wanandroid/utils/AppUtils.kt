@@ -1,6 +1,7 @@
 package club.biggerm.asionbo.wanandroid.utils
 
 import android.content.Context
+import android.telephony.TelephonyManager
 import club.biggerm.asionbo.wanandroid.R
 import com.afollestad.materialdialogs.MaterialDialog
 
@@ -22,5 +23,14 @@ object AppUtils{
                 .onPositive{dialog,which->
                     dialog.dismiss()
                 }.show()
+    }
+
+    /**
+     * 获取设备IMEI
+     */
+    fun getIMEI(context: Context){
+        val manager : TelephonyManager
+        manager = context.getSystemService(Context.TELEPHONY_SERVICE) as TelephonyManager
+
     }
 }

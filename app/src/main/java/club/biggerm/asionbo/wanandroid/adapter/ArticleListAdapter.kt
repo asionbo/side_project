@@ -30,7 +30,7 @@ class ArticleListAdapter(private val context:Context): RecyclerView.Adapter<Arti
     }
 
     override fun getItemCount(): Int {
-        return if (data == null) 0 else data.size
+        return data.size
     }
 
     override fun onBindViewHolder(holder: DataViewHolder, position: Int) {

@@ -1,5 +1,6 @@
 package club.biggerm.asionbo.wanandroid.network
 
+import android.util.Log
 import okhttp3.Interceptor
 import okhttp3.Response
 import java.util.prefs.Preferences
@@ -14,6 +15,7 @@ class AddCookiesInterceptor : Interceptor {
         try {
             val builder = chain!!.request().newBuilder()
             val cookie = Preferences.userRoot().get("cookies", "Cookie")
+            Log.d("Cookie",cookie)
             builder.addHeader("Cookie",cookie)
             return chain.proceed(builder.build())
         }catch (e:Exception){
