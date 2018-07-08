@@ -24,6 +24,4 @@ class ArticleTitleAdapter(layoutResId: Int, data: List<Article>) : BaseQuickAdap
             Picasso.get().load(item.envelopePic).fit().into(helper.getView<ImageView>(iv_article_pic))
         }
     }
-
-
 }

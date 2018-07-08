@@ -56,5 +56,9 @@ class Article{
     var type: Int = 0
     var visible: Int = 0
     var zan: Int = 0
+    override fun toString(): String {
+        return "Article(apkLink='$apkLink', author='$author', chapterId=$chapterId, chapterName='$chapterName', collect=$collect, courseId=$courseId, desc='$desc', envelopePic='$envelopePic', fresh=$fresh, id=$id, link='$link', niceDate='$niceDate', origin='$origin', projectLink='$projectLink', publishTime=$publishTime, superChapterId=$superChapterId, superChapterName='$superChapterName', tags=$tags, title='$title', type=$type, visible=$visible, zan=$zan)"
+    }
+
 
 }
