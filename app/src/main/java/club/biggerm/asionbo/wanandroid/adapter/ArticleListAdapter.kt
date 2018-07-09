@@ -16,7 +16,6 @@ import com.squareup.picasso.Picasso
  * Created by asionbo on 2018/4/28.
  */
 class ArticleListAdapter(private val context:Context): RecyclerView.Adapter<ArticleListAdapter.DataViewHolder>() {
-
     var data : List<Article> = listOf()
 
     fun addData(list : List<Article>){
@@ -24,7 +23,7 @@ class ArticleListAdapter(private val context:Context): RecyclerView.Adapter<Arti
         this.notifyDataSetChanged()
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): DataViewHolder{
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DataViewHolder{
         val view = LayoutInflater.from(context).inflate(R.layout.article_list_item,parent,false)
         return DataViewHolder(view)
     }

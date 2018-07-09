@@ -1,6 +1,7 @@
 package club.biggerm.asionbo.wanandroid.network
 
 import club.biggerm.asionbo.wanandroid.model.ArticleTotal
+import club.biggerm.asionbo.wanandroid.model.Banner
 import club.biggerm.asionbo.wanandroid.model.BaseResult
 import club.biggerm.asionbo.wanandroid.model.User
 import io.reactivex.Observable
@@ -22,4 +23,7 @@ interface OpenApiService{
 
     @GET("article/list/{page}/json")
     fun getArticleList(@Path("page") page:Int):Observable<BaseResult<ArticleTotal>>
+
+    @GET("banner/json")
+    fun getBanner():Observable<BaseResult<List<Banner>>>
 }

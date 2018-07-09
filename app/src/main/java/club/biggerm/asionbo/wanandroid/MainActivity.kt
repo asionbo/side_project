@@ -5,12 +5,18 @@ import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
 import android.util.Log
 import android.widget.TextView
-import android.widget.Toast
 import club.biggerm.asionbo.wanandroid.adapter.ArticleTitleAdapter
 import club.biggerm.asionbo.wanandroid.model.Article
+import club.biggerm.asionbo.wanandroid.model.Banner
+import club.biggerm.asionbo.wanandroid.model.Event
 import club.biggerm.asionbo.wanandroid.network.OpenApiService
 import club.biggerm.asionbo.wanandroid.network.WebDataSource
+import club.biggerm.asionbo.wanandroid.utils.Constant.EVENT_SUCCESS
+import club.biggerm.asionbo.wanandroid.utils.PicassoBannerLoader
+import club.biggerm.asionbo.wanandroid.utils.RxBus
 import club.biggerm.asionbo.wanandroid.webview.ContentWebViewActivity
+import cn.levey.bannerlib.RxBanner
+import cn.levey.bannerlib.data.RxBannerConfig
 import com.chad.library.adapter.base.BaseQuickAdapter
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
@@ -27,13 +33,60 @@ class MainActivity : BaseActivity() {
     var isErr = true
     var alreadyPage = 0
     val adapter: ArticleTitleAdapter = ArticleTitleAdapter(R.layout.article_list_item,datas)
+    var rxBanner: RxBanner? = null
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.main_activity)
+        getBanner()
         initView()
         getArticleList(alreadyPage)
+        rxBanner = rxb_main.setLoader(PicassoBannerLoader())
+    }
+
+    override fun onResume() {
+        super.onResume()
+        rxBanner!!.onResume()
+        if (mDisposable == null || mDisposable!!.isDisposed){
+            mDisposable = RxBus.INSTANCE.toObserverable(Event::class.java)
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe({
+                        when (it.type){
+                            EVENT_SUCCESS -> {
+                                val post = it.post as List<Banner>
+                                setBanner(post)
+                            }
+                            else ->{
+                                Log.e("event","none")
+                            }
+                        }
+                    },{
+                        t -> showResultDialog(t.message!!)
+                    })
+        }
+    }
+
+    override fun onPause() {
+        super.onPause()
+        rxBanner!!.onPause()
+    }
+
+    private fun getBanner(){
+        WebDataSource.instance.retrofit.create(OpenApiService::class.java)
+                .getBanner()
+                .subscribeOn(Schedulers.io())
+                .unsubscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe({result ->
+                    if(0 == result.errorCode){
+                        RxBus.INSTANCE.post(Event(EVENT_SUCCESS,result.data))
+                    }else{
+                        showResultDialog(result.errorMsg)
+                    }
+                },{ error ->
+                    error.printStackTrace()
+                })
     }
 
     private fun getArticleList(page:Int) {
@@ -70,10 +123,7 @@ class MainActivity : BaseActivity() {
 
         adapter.setOnItemClickListener { adapter1, view, position ->
             val item = adapter.getItem(position)
-            val intent = Intent(this, ContentWebViewActivity::class.java)
-            Log.e("item",item.toString())
-            intent.putExtra("article",item!!.link)
-            startActivity(intent)
+            goToWebView(item!!.link)
         }
 
         //下拉刷新
@@ -114,6 +164,23 @@ class MainActivity : BaseActivity() {
                 }
             },300)
         },rl_content)
+
+    }
+
+
+    fun setBanner(banners:List<Banner>){
+        val imgs = mutableListOf<String>()
+        val titls = mutableListOf<String>()
+        for (banner in banners){
+            imgs.add(banner.imagePath)
+            titls.add(banner.title)
+        }
+        rxBanner!!.setConfig(RxBannerConfig())
+                .setDatas(imgs,titls)
+                .setOnBannerTitleClickListener { pos, title ->
+                    goToWebView(banners[pos].url)
+                }
+                .start()
     }
 
 
@@ -121,5 +188,16 @@ class MainActivity : BaseActivity() {
         val tv = TextView(this)
         tv.text = "header view"
         return tv
+    }
+
+    fun goToWebView(url:String){
+        val intent = Intent(this, ContentWebViewActivity::class.java)
+        intent.putExtra("article_url",url)
+        startActivity(intent)
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        rxBanner!!.onDestroy()
     }
 }

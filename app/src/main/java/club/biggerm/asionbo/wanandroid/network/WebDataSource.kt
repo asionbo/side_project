@@ -1,6 +1,6 @@
 package club.biggerm.asionbo.wanandroid.network
 
-import club.biggerm.asionbo.wanandroid.utils.BASE_URL
+import club.biggerm.asionbo.wanandroid.utils.Constant.BASE_URL
 import com.google.gson.Gson
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor

@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.widget.LinearLayout
 import club.biggerm.asionbo.wanandroid.BaseActivity
 import club.biggerm.asionbo.wanandroid.R
+import club.biggerm.asionbo.wanandroid.R.id.ll_content
 import com.just.agentweb.AgentWeb
 import kotlinx.android.synthetic.main.content_wv_activity.*
 
@@ -18,7 +19,7 @@ class ContentWebViewActivity:BaseActivity(){
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.content_wv_activity)
-        articleLink = intent.getStringExtra("article")
+        articleLink = intent.getStringExtra("article_url")
         initView()
     }
 
