@@ -2,4 +2,7 @@
     <!-- Default screen margins, per the Android Design guidelines. -->
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
+    <item name="rb_item_percent" type="dimen" format="integer">70</item>
+    <item name="rb_item_scale" type="dimen" format="float">0.6</item>
+    <item name="rb_side_alpha" type="dimen" format="float">0.8</item>
 </resources>

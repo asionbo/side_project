@@ -1,5 +1,6 @@
 package club.biggerm.asionbo.wanandroid
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
@@ -12,14 +13,16 @@ import club.biggerm.asionbo.wanandroid.model.Event
 import club.biggerm.asionbo.wanandroid.network.OpenApiService
 import club.biggerm.asionbo.wanandroid.network.WebDataSource
 import club.biggerm.asionbo.wanandroid.utils.Constant.EVENT_SUCCESS
-import club.biggerm.asionbo.wanandroid.utils.PicassoBannerLoader
+import club.biggerm.asionbo.wanandroid.utils.GlideBannerLoader
 import club.biggerm.asionbo.wanandroid.utils.RxBus
 import club.biggerm.asionbo.wanandroid.webview.ContentWebViewActivity
 import cn.levey.bannerlib.RxBanner
-import cn.levey.bannerlib.data.RxBannerConfig
+import cn.levey.bannerlib.impl.RxBannerClickListener
 import com.chad.library.adapter.base.BaseQuickAdapter
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
+import kotlinx.android.synthetic.main.content_wv_activity.*
+import kotlinx.android.synthetic.main.main_activity.toolbar
 import kotlinx.android.synthetic.main.main_activity.*
 
 /**
@@ -36,13 +39,17 @@ class MainActivity : BaseActivity() {
     var rxBanner: RxBanner? = null
 
 
+    @SuppressLint("RestrictedApi")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.main_activity)
+        setSupportActionBar(toolbar)
+        supportActionBar!!.setDefaultDisplayHomeAsUpEnabled(true)
+        title = "玩安卓"
         getBanner()
         initView()
         getArticleList(alreadyPage)
-        rxBanner = rxb_main.setLoader(PicassoBannerLoader())
+        rxBanner = rxb_main.setLoader(GlideBannerLoader())
     }
 
     override fun onResume() {
@@ -175,11 +182,24 @@ class MainActivity : BaseActivity() {
             imgs.add(banner.imagePath)
             titls.add(banner.title)
         }
-        rxBanner!!.setConfig(RxBannerConfig())
-                .setDatas(imgs,titls)
+//        val config = RxBannerConfig()
+//        config.itemPercent = 70
+//        config.setItemSpaceDp(0)
+//        config.sideAlpha = 1.0f
+//        config.itemScale = 0.5f
+//        rxBanner!!.config = config
+        rxBanner!!.setDatas(imgs,titls)
                 .setOnBannerTitleClickListener { pos, title ->
                     goToWebView(banners[pos].url)
                 }
+                .setOnBannerClickListener(object :RxBannerClickListener{
+                    override fun onItemLongClick(p0: Int, p1: Any?) {
+                    }
+
+                    override fun onItemClick(p0: Int, p1: Any?) {
+                        goToWebView(banners[p0].url)
+                    }
+                })
                 .start()
     }
 
@@ -199,5 +219,15 @@ class MainActivity : BaseActivity() {
     override fun onDestroy() {
         super.onDestroy()
         rxBanner!!.onDestroy()
+    }
+
+    class clickListener: RxBannerClickListener{
+        override fun onItemLongClick(p0: Int, p1: Any?) {
+        }
+
+        override fun onItemClick(p0: Int, p1: Any?) {
+
+        }
+
     }
 }

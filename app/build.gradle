@@ -43,6 +43,8 @@ dependencies {
     implementation 'com.tencent.tac:tac-core:1.1.2'
     implementation 'com.afollestad.material-dialogs:commons:0.9.6.0'
     implementation 'com.squareup.picasso:picasso:2.71828'
+    implementation 'com.github.bumptech.glide:glide:4.7.1'
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.7.1'
     implementation 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.30'
     implementation 'com.just.agentweb:agentweb:4.0.2'
     implementation 'com.github.leveychen:RxBanner:1.0.5'

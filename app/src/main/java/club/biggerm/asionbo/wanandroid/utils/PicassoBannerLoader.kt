@@ -22,7 +22,7 @@ class PicassoBannerLoader : RxBannerLoaderInterface<ImageView> {
                 return
             }
             is String ->{
-                Picasso.get().load(path).into(item)
+                Picasso.get().load(path).centerCrop().into(item)
                 return
             }
             is Uri ->{
