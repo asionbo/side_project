@@ -25,10 +25,6 @@ enum class RxBus(){
         return mBus!!.ofType(eventType)
     }
 
-    fun toObservable(): Observable<Any>? {
-        return mBus
-    }
-
     fun hasObservers(): Boolean {
         return mBus!!.hasObservers()
     }

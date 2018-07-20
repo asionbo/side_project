@@ -4,4 +4,8 @@
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
     <color name="colorBackground">#b3e5fc</color>
+    <color name="md_gray_400">#E0E0E0</color>
+    <color name="md_gray_800">#424242</color>
+    <color name="md_gray_900">#212121</color>
+    <color name="md_black">#000000</color>
 </resources>

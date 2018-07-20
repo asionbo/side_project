@@ -2,7 +2,7 @@ package club.biggerm.asionbo.wanandroid.webview
 
 import android.annotation.SuppressLint
 import android.os.Bundle
-import android.widget.LinearLayout
+import android.widget.FrameLayout
 import club.biggerm.asionbo.wanandroid.BaseActivity
 import club.biggerm.asionbo.wanandroid.R
 import com.just.agentweb.AgentWeb
@@ -30,7 +30,7 @@ class ContentWebViewActivity:BaseActivity(){
 
     private fun initView() {
         mAgentWeb = AgentWeb.with(this)
-                .setAgentWebParent(ll_content, LinearLayout.LayoutParams(-1,-1))
+                .setAgentWebParent(ll_content, FrameLayout.LayoutParams(-1,-1))
                 .useDefaultIndicator()
                 .setOpenOtherPageWays(DefaultWebClient.OpenOtherPageWays.ASK)
                 .createAgentWeb()

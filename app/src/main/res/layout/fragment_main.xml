@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+        <cn.levey.bannerlib.RxBanner
+            android:id="@+id/rxb_main"
+            android:layout_width="match_parent"
+            android:layout_height="160dp"
+            android:paddingTop="5dp"
+            app:rb_itemSpace="-30dp"
+            app:rb_itemPercent="@dimen/rb_item_percent"
+            app:rb_itemScale="@dimen/rb_item_scale"
+            app:rb_sideAlpha="@dimen/rb_side_alpha"
+            app:rb_title_size="16sp"
+            app:rb_indicator_animationType="worm"
+            app:rb_indicator_padding="2dp"
+            app:rb_indicator_radius="3dp"
+            />
+
+        <android.support.v4.widget.SwipeRefreshLayout
+            android:id="@+id/srl_refresh"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/rl_content"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
+        </android.support.v4.widget.SwipeRefreshLayout>
+
+
+
+    </LinearLayout>
+
+</LinearLayout>
