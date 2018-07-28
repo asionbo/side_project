@@ -36,6 +36,7 @@ class HomeFragment : BaseFragment(){
     var mRecyclerView:RecyclerView? = null
     var datas:List<Article> = listOf()
     var mAdapter: ArticleTitleAdapter? = null
+    var currentPage = 0
 
     override fun initView(view: View, savedInstanceState: Bundle?) {
         rxBanner = view.findViewById(R.id.rxb_main) as RxBanner
@@ -56,15 +57,17 @@ class HomeFragment : BaseFragment(){
         super.initData()
         mAdapter!!.setOnLoadMoreListener({
             Log.e("tag","loadmore")
+            currentPage += 1
+            getArticleList(currentPage)
         },mRecyclerView)
 
         mAdapter!!.setOnItemClickListener { baseQuickAdapter: BaseQuickAdapter<Any, BaseViewHolder>, view: View, i: Int ->
-            goToWebView(datas[i].link)
+            goToWebView(datas[i].link,datas[i].title)
         }
 
         mAdapter!!.setOnItemChildClickListener { adapter, view, position ->
             run {
-                Log.e("tag", "click_child" + position)
+                showToast("click_child" + position)
             }
         }
 
@@ -83,7 +86,7 @@ class HomeFragment : BaseFragment(){
         super.setLazyLoad()
         Log.e("tag","lazyLoad")
         getBanner()
-        getArticleList(0)
+        getArticleList(currentPage)
     }
 
     private fun getBanner(){
@@ -112,7 +115,7 @@ class HomeFragment : BaseFragment(){
         }
         rxBanner!!.setDatas(imgs,titls)
                 .setOnBannerTitleClickListener { pos, title ->
-                    goToWebView(banners[pos].url)
+                    goToWebView(banners[pos].url,banners[pos].title)
                 }
                 .setOnBannerClickListener(object : RxBannerClickListener {
                     override fun onItemLongClick(p0: Int, p1: Any?) {
@@ -120,15 +123,16 @@ class HomeFragment : BaseFragment(){
                     }
 
                     override fun onItemClick(p0: Int, p1: Any?) {
-                        goToWebView(banners[p0].url)
+                        goToWebView(banners[p0].url,banners[p0].title)
                     }
                 })
                 .start()
     }
 
-    fun goToWebView(url:String){
+    fun goToWebView(url:String,title: String?){
         val intent = Intent(context, ContentWebViewActivity::class.java)
         intent.putExtra("article_url",url)
+        intent.putExtra("title",title)
         startActivity(intent)
     }
 
@@ -141,7 +145,11 @@ class HomeFragment : BaseFragment(){
                 .subscribe({result ->
                     if(0 == result.errorCode){
                         datas = result.data.datas
-                        mAdapter!!.setNewData(datas)
+                        if (!mAdapter!!.data.isEmpty()){
+                            mAdapter!!.addData(datas)
+                        }else {
+                            mAdapter!!.setNewData(datas)
+                        }
                     }else{
 //                        showResultDialog(result.errorMsg)
                     }

@@ -7,6 +7,7 @@ import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import club.biggerm.asionbo.wanandroid.fragment.LoadPage
 
 /**
@@ -18,6 +19,7 @@ abstract class BaseFragment : Fragment(){
     var mActivity: Activity? = null
     val FRAGMENT_IS_HIDDEN:String = "fragment_is_hidden"
     protected var isSee:Boolean = false
+    protected var isFirstSee:Boolean = false
 
     override fun onAttach(context: Context?) {
         super.onAttach(context)
@@ -88,6 +90,10 @@ abstract class BaseFragment : Fragment(){
      */
     open fun initData(){
 
+    }
+
+    open fun showToast(msg:String){
+        Toast.makeText(mActivity,msg,Toast.LENGTH_SHORT).show()
     }
 
     override fun onSaveInstanceState(outState: Bundle) {

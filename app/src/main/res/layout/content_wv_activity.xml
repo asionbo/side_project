@@ -17,7 +17,10 @@
             android:layout_height="?attr/actionBarSize"
             android:background="?attr/colorPrimary"
             app:layout_scrollFlags="scroll"
-            app:popupTheme="@style/AppTheme.PopupOverlay"/>
+            app:popupTheme="@style/AppTheme.PopupOverlay"
+            app:titleTextAppearance="@style/TextAppearance.AppCompat.SearchResult.Title"
+            app:subtitleTextAppearance="@style/TextAppearance.AppCompat.Small"
+            app:titleMarginEnd="100dp"/>
 
     </android.support.design.widget.AppBarLayout>
     <LinearLayout

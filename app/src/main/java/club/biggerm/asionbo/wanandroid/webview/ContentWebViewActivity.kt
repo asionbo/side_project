@@ -15,7 +15,8 @@ import kotlinx.android.synthetic.main.content_wv_activity.*
 class ContentWebViewActivity:BaseActivity(){
 
     var mAgentWeb:AgentWeb? = null
-    var articleLink: String? = ""
+    var mArticleLink: String? = ""
+    var mTitle: String? = null
 
     @SuppressLint("RestrictedApi")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -23,8 +24,13 @@ class ContentWebViewActivity:BaseActivity(){
         setContentView(R.layout.content_wv_activity)
         setSupportActionBar(toolbar)
         supportActionBar!!.setDefaultDisplayHomeAsUpEnabled(true)
-        title = "web"
-        articleLink = intent.getStringExtra("article_url")
+        mArticleLink = intent.getStringExtra("article_url")
+        mTitle = intent.getStringExtra("title")
+        if (mTitle != null){
+            title = mTitle
+        }else{
+            title = mArticleLink
+        }
         initView()
     }
 
@@ -35,7 +41,7 @@ class ContentWebViewActivity:BaseActivity(){
                 .setOpenOtherPageWays(DefaultWebClient.OpenOtherPageWays.ASK)
                 .createAgentWeb()
                 .ready()
-                .go(articleLink)
+                .go(mArticleLink)
     }
 
     override fun onResume() {

@@ -40,10 +40,10 @@ class WebDataSource private constructor(){
     val file = File(MyApplication.instance().cacheDir,"wanAndroidCache")
     val cache = Cache(file,1024*1024*10)
 
-    // Cookie 持久化
 
     private fun initRetrofit():Retrofit{
         val builder = OkHttpClient.Builder()
+//                .cache(cache)
                 .addInterceptor(getLogInterceptor())
                 .addInterceptor(ReceivedCookiesInterceptor())
                 .addInterceptor(AddCookiesInterceptor())

@@ -1,8 +1,9 @@
 package club.biggerm.asionbo.wanandroid.network
 
+import club.biggerm.asionbo.wanandroid.MyApplication
+import club.biggerm.asionbo.wanandroid.utils.PreferenceUtils
 import okhttp3.Interceptor
 import okhttp3.Response
-import java.util.prefs.Preferences
 
 /**
  * Created by asionbo on 2018/5/2.
@@ -14,12 +15,11 @@ class ReceivedCookiesInterceptor:Interceptor{
         try {
             val originalResponse = chain!!.proceed(chain.request())
             if (!originalResponse.headers("Set-Cookie").isEmpty()){
-                var cookies = ""
+                val cookies = StringBuilder()
                 for (header in originalResponse.headers("Set-Cookie")){
-                    if (header.contains("JSESSIONID"))
-                        cookies = header
+                    cookies.append(header)
                 }
-                Preferences.userRoot().put("cookies",cookies);
+                PreferenceUtils.setParam(MyApplication.instance(),"Cookies",cookies.toString())
             }
             return originalResponse
         }catch (e:Exception){
