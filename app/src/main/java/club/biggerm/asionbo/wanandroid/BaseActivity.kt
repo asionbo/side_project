@@ -1,9 +1,7 @@
 package club.biggerm.asionbo.wanandroid
 
-import android.content.Context
 import android.support.v7.app.AppCompatActivity
 import club.biggerm.asionbo.wanandroid.utils.AppUtils
-import com.afollestad.materialdialogs.MaterialDialog
 import io.reactivex.disposables.Disposable
 
 /**

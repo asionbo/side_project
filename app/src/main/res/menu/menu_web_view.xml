@@ -1,0 +1,20 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+      xmlns:app="http://schemas.android.com/apk/res-auto"
+      xmlns:tools="http://schemas.android.com/tools"
+      tools:context=".MainActivity">
+
+    <item
+        android:id="@+id/share"
+        android:title="@string/menu_share"
+        android:icon="@drawable/ic_share_black_24dp"
+        android:orderInCategory="100"
+        app:showAsAction="never"/>
+    <item
+        android:id="@+id/browser"
+        android:title="@string/menu_open_in_browser"
+        android:icon="@drawable/ic_open_in_browser_black_24dp"
+        android:orderInCategory="100"
+        app:showAsAction="never"/>
+
+
+</menu>
