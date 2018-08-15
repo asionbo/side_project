@@ -1,6 +1,7 @@
 package club.biggerm.asionbo.wanandroid
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
@@ -19,7 +20,6 @@ class MainActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.main_activity)
         setSupportActionBar(toolbar)
-//        supportActionBar!!.setDefaultDisplayHomeAsUpEnabled(true)
         supportActionBar!!.setDisplayShowHomeEnabled(false)
         title = getString(R.string.app_name)
         initFragment()
@@ -33,7 +33,8 @@ class MainActivity : BaseActivity() {
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         when(item!!.itemId){
             R.id.account ->{
-                showResultDialog("account")
+                val intent = Intent(this,LoginActivity::class.java)
+                startActivity(intent)
             }
         }
         return super.onOptionsItemSelected(item)

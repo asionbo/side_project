@@ -22,15 +22,17 @@ interface OpenApiService{
 
 
 //    login response header
-//    HTTP/1.1 200 OK
+//    08-15 14:56:46.961 7714-7840/club.biggerm.asionbo.wanandroid D/OkHttp: <-- 200 OK http://www.wanandroid.com/user/login?username=wan_01&password=123456 (176ms)
 //    Server: Apache-Coyote/1.1
-//    Set-Cookie: JSESSIONID=3BB395FC33C5B4EBD6BBE59874310374; Path=/; HttpOnly
-//    Set-Cookie: loginUserName=wan_01; Expires=Thu, 23-Aug-2018 01:37:54 GMT; Path=/
-//    Set-Cookie: loginUserPassword=123456; Expires=Thu, 23-Aug-2018 01:37:54 GMT; Path=/
-//    Content-Type: application/json;charset=UTF-8
+//    Set-Cookie: loginUserName=wan_01; Expires=Fri, 14-Sep-2018 06:56:50 GMT; Path=/
+//    Set-Cookie: loginUserPassword=123456; Expires=Fri, 14-Sep-2018 06:56:50 GMT; Path=/
+//    08-15 14:56:46.964 7714-7840/club.biggerm.asionbo.wanandroid D/OkHttp: Set-Cookie: token_pass=5d9b90bcb70640183e09d1e755ead823; Expires=Fri, 14-Sep-2018 06:56:50 GMT; Path=/
+//    08-15 14:56:46.965 7714-7840/club.biggerm.asionbo.wanandroid D/OkHttp: Content-Type: application/json;charset=UTF-8
 //    Transfer-Encoding: chunked
-//    Date: Tue, 24 Jul 2018 01:37:53 GMT
-    @POST("login")
+//    Date: Wed, 15 Aug 2018 06:56:49 GMT
+//    08-15 14:56:46.967 7714-7840/club.biggerm.asionbo.wanandroid D/OkHttp: {"data":{"collectIds":[],"email":"","icon":"","id":5215,"password":"123456","token":"","type":0,"username":"wan_01"},"errorCode":0,"errorMsg":""}
+//    <-- END HTTP (145-byte body)
+    @POST("user/login")
     fun login(@Query("username") username: String,@Query("password") password: String):Observable<BaseResult<User>>
 
     @GET("article/list/{page}/json")
