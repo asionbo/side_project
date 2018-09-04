@@ -62,7 +62,7 @@ class HomeFragment : BaseFragment(){
         },mRecyclerView)
 
         mAdapter!!.setOnItemClickListener { baseQuickAdapter: BaseQuickAdapter<Any, BaseViewHolder>, view: View, i: Int ->
-            goToWebView(datas[i].link,datas[i].title)
+            goToWebView(mAdapter!!.data[i].link,mAdapter!!.data[i].title)
         }
 
         mAdapter!!.setOnItemChildClickListener { adapter, view, position ->
@@ -140,22 +140,26 @@ class HomeFragment : BaseFragment(){
         WebDataSource.instance.retrofit.create(OpenApiService::class.java)
                 .getArticleList(page)
                 .subscribeOn(Schedulers.io())
-                .unsubscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe({result ->
-                    if(0 == result.errorCode){
+                .subscribe({ result ->
+                    if (0 == result.errorCode) {
                         datas = result.data.datas
-                        if (!mAdapter!!.data.isEmpty()){
+                        if (!mAdapter!!.data.isEmpty()) {
                             mAdapter!!.addData(datas)
-                        }else {
-                            mAdapter!!.setNewData(datas)
+                        } else {
+                            val mutableList = mAdapter!!.data.toMutableList()
+                            mutableList.addAll(datas)
+                            mAdapter!!.setNewData(mutableList)
+                            mAdapter!!.setEnableLoadMore(false)
                         }
-                    }else{
+                        Log.e("tag2", "i'm result")
+                    } else {
 //                        showResultDialog(result.errorMsg)
                     }
-                },{ error ->
+                }, { error ->
                     error.printStackTrace()
                 })
+        Log.e("tag2","down-getArticleList")
     }
 
     override fun onResume() {
