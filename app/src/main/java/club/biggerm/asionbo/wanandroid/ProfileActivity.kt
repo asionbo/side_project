@@ -1,9 +1,6 @@
 package club.biggerm.asionbo.wanandroid
 
-import android.content.res.ColorStateList
-import android.graphics.Color
 import android.os.Bundle
-import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import club.biggerm.asionbo.wanandroid.utils.Constant
@@ -36,15 +33,8 @@ class ProfileActivity : BaseActivity() {
                 .apply(RequestOptions.centerCropTransform())
                 .into(iv_scrolling_top)
 
-        collapsing_toolbar_layout.setCollapsedTitleTextColor(ColorStateList.valueOf(Color.TRANSPARENT))
-        app_bar_scrolling.addOnOffsetChangedListener { appBarLayout, verticalOffset ->
-            Log.e("tag","verticalOffset="+verticalOffset)
-            if (verticalOffset <= - iv_scrolling_top.height / 2){
-                collapsing_toolbar_layout.title = account
-            }else{
-                collapsing_toolbar_layout.title = ""
-            }
-        }
+        collapsing_toolbar_layout.setContentScrimColor(resources.getColor(R.color.colorPrimary))
+        collapsing_toolbar_layout.title = account
     }
 
 
