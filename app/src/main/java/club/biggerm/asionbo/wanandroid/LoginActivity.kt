@@ -37,7 +37,7 @@ class LoginActivity : BaseActivity() {
         val arrayAdapter = ArrayAdapter<String>(this, android.R.layout.simple_dropdown_item_1line, atmpHistory)
         atv_account.setAdapter(arrayAdapter)
 
-        btn_login.setOnClickListener { v: View? ->
+        sbtn_login.setOnClickListener { v: View? ->
             if (beforeLogin()) {
                 login()
             }

@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_marginTop="3dp"
     android:background="@android:color/white"
     android:orientation="vertical"
@@ -34,6 +35,16 @@
                 android:paddingRight="3dp"
                 tools:text="项目"
                 android:textAppearance="@style/TextAppearance.AppCompat.Small"/>
+            <club.biggerm.asionbo.wanandroid.view.SelfButton
+                android:layout_width="40dp"
+                android:layout_height="20dp"
+                android:text="NEW"
+                android:textColor="@color/colorAccent"
+                app:sb_fillColor="@color/md_gray_400"
+                app:sb_activeEnable="true"
+                app:sb_shapeMode="rectangle"
+                app:sb_cornerRadius="20dp"
+                />
             <TextView
                 android:id="@+id/tv_author"
                 android:layout_width="wrap_content"

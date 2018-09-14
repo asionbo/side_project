@@ -73,13 +73,20 @@
 
             </android.support.design.widget.TextInputLayout>
 
-            <Button
-                android:id="@+id/btn_login"
-                style="?android:textAppearanceButton"
+            <club.biggerm.asionbo.wanandroid.view.SelfButton
+                android:id="@+id/sbtn_login"
+                style="@style/SelfButton"
                 android:layout_marginTop="10dp"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="50dp"
                 android:text="@string/action_sign_in"
+                android:textColor="@color/md_white"
+                android:textStyle="bold"
+                app:sb_pressedColor="@color/colorAccent"
+                app:sb_shapeMode="rectangle"
+                app:sb_cornerRadius="50dp"
+                app:sb_fillColor="@color/colorPrimary"
+                app:sb_activeEnable="true"
                  />
 
         </LinearLayout>

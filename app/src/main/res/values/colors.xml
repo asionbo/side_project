@@ -8,4 +8,5 @@
     <color name="md_gray_800">#424242</color>
     <color name="md_gray_900">#212121</color>
     <color name="md_black">#000000</color>
+    <color name="md_white">#FFFFFF</color>
 </resources>
